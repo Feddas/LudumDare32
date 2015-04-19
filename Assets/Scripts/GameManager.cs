@@ -6,7 +6,8 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public Text CoinsValue;
-
+    public TextFader TextFader;
+    public int CoinsToWin = 40;
     private int coinCount;
 
     public int CoinCount
@@ -17,8 +18,15 @@ public class GameManager : MonoBehaviour
             if (value == coinCount)
                 return;
 
+            if (value == 0)
+            {
+                TextFader.ShowText("You won! Next you're sure to find an unconventional way for weapons to cure cancer.");
+                this.Delay(2, () => Time.timeScale = 0);
+            }
+
             coinCount = value;
             CoinsValue.text = value.ToString();
+
         }
     }
 
@@ -30,12 +38,19 @@ public class GameManager : MonoBehaviour
             throw new Exception("Can not have more than one GameManager");
 
         Instance = this;
-        CoinCount = 20;
+        CoinCount = CoinsToWin;
+
+        TextFader.ShowText("Use your unconventional handgun car engine to collect " + CoinCount + " cubes.");
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void OverlayText(string textToOverlay)
+    {
+        TextFader.ShowText(textToOverlay);
     }
 }

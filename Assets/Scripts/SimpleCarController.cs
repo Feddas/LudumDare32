@@ -82,6 +82,7 @@ public class SimpleCarController : MonoBehaviour
             this.transform.position = new Vector3(0, .8f, 0);
             this.transform.rotation = Quaternion.identity;
             GameManager.Instance.CoinCount += 20;
+            GameManager.Instance.OverlayText("You hit a wall, you have to collect 20 more cubes.");
         }
         else
         {

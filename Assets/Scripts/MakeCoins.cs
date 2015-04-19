@@ -19,7 +19,7 @@ public class MakeCoins : MonoBehaviour
         if (coins.Count > 1000)
             return;
 
-        var position = new Vector3(Random.Range(-6, 6), 10, Random.Range(4, 10));
+        var position = new Vector3(Random.Range(6, 16), 20, Random.Range(4, 14));
         var newCoin = Instantiate(coin, position, Quaternion.identity) as GameObject;
         coins.Add(newCoin);
     }
