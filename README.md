@@ -1,5 +1,6 @@
 # Solo entry for LudumDare32
 "An unconventional weapon"
+Play this game with WebGL http://ludumdare.com/compo/ludum-dare-32/?action=preview&uid=22714
 by http://ludumdare.com/compo/author/ShawnFeatherly
 LDJAm Rules: tinyurl.com/LDJamRulesByQuill
 

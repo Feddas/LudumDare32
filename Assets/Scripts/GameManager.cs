@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public Text CoinsValue;
     public TextFader TextFader;
-    public int CoinsToWin = 40;
+    public int CoinsToWin = 100;
     private int coinCount;
 
     public int CoinCount

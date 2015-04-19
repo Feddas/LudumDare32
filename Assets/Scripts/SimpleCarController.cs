@@ -78,7 +78,7 @@ public class SimpleCarController : MonoBehaviour
         }
         else if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            Debug.Log("Hit wall " + collision.gameObject.name);
+            //Debug.Log("Hit wall " + collision.gameObject.name);
             this.transform.position = new Vector3(0, .8f, 0);
             this.transform.rotation = Quaternion.identity;
             GameManager.Instance.CoinCount += 20;
@@ -86,7 +86,7 @@ public class SimpleCarController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Hit other " + collision.gameObject.name);
+            //Debug.Log("Hit other " + collision.gameObject.name);
         }
     }
 }
