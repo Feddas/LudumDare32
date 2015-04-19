@@ -12,8 +12,11 @@ cannon
 
 # game title: Gunpowder Engine
 This is an unconventional driving game. What's unconventional about it? Your car's engine.
-What's your engine? an unconventionally used weapon!
+What's your engine? An unconventionally used weapon!
 
 # Controls
-"Horizontal" (WASD or ArrowKeys or gamepad left stick) to attempt steering
-"Fire1" (left click) to fire your guns, producing explosive car thrust
+"Horizontal" (WASD or ArrowKeys or gamepad left stick) to steer
+"Fire1" (left click) to fire your gun engine, producing explosive car thrust
+
+# TODO:
+check if players vector up matches world vector up with a dot product. if more than 80`, restart in center.

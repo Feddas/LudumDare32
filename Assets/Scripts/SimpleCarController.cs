@@ -41,7 +41,7 @@ public class SimpleCarController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        float motor = maxMotorTorque * Input.GetAxis("Vertical");
+        float motor = maxMotorTorque * Recoil.CarRecoil;// Input.GetAxis("Vertical");
         float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
 
         foreach (AxleInfo axleInfo in axleInfos)
@@ -51,11 +51,11 @@ public class SimpleCarController : MonoBehaviour
                 axleInfo.leftWheel.steerAngle = steering;
                 axleInfo.rightWheel.steerAngle = steering;
             }
-            if (axleInfo.motor)
-            {
+            //if (axleInfo.motor)
+            //{
                 axleInfo.leftWheel.motorTorque = motor;
                 axleInfo.rightWheel.motorTorque = motor;
-            }
+            //}
             ApplyLocalPositionToVisuals(axleInfo.leftWheel);
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
         }
@@ -63,11 +63,29 @@ public class SimpleCarController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Collectable")
-            return;
+        if (collision.gameObject.tag == "Collectable")
+        {
+            //Debug.Log("Picked up " + collision.gameObject.name);
+            var clip = collision.gameObject.GetComponent<AudioSource>().clip;
+            var audio = this.GetComponent<AudioSource>();
 
-        Debug.Log("Touched" + collision.gameObject.name);
-        Destroy(collision.gameObject);
-        GameManager.Instance.CoinCount++;
+            audio.Stop();
+            audio.clip = clip;
+            audio.Play();
+
+            GameManager.Instance.CoinCount--;
+            Destroy(collision.gameObject);
+        }
+        else if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            Debug.Log("Hit wall " + collision.gameObject.name);
+            this.transform.position = new Vector3(0, .8f, 0);
+            this.transform.rotation = Quaternion.identity;
+            GameManager.Instance.CoinCount += 20;
+        }
+        else
+        {
+            Debug.Log("Hit other " + collision.gameObject.name);
+        }
     }
 }

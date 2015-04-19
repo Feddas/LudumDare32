@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
             throw new Exception("Can not have more than one GameManager");
 
         Instance = this;
+        CoinCount = 20;
     }
 
     // Update is called once per frame

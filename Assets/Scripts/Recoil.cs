@@ -6,6 +6,7 @@ using System.Collections;
 /// </summary>
 public class Recoil : MonoBehaviour
 {
+    public static float CarRecoil;
     public string FireButton = "Fire1";
     public GameObject ExplosionOrigin;
     public ParticleSystem GunBurst;
@@ -18,9 +19,11 @@ public class Recoil : MonoBehaviour
     private float maxRecoil_x;
     private float maxRecoil_y;
     private float recoilSpeed = 2f;
+    private AudioSource gunAudio;
 
     void Start()
     {
+        gunAudio = ExplosionOrigin.GetComponent<AudioSource>();
     }
 
     public void StartRecoil(float recoilParam, float maxRecoil_xParam, float recoilSpeedParam)
@@ -49,6 +52,11 @@ public class Recoil : MonoBehaviour
             // Dampen towards the target rotation
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, Time.deltaTime * recoilSpeed / 2);
         }
+
+        if (CarRecoil > float.Epsilon)
+        {
+            CarRecoil -= Time.deltaTime;
+        }
     }
 
     // Update is called once per frame
@@ -61,6 +69,10 @@ public class Recoil : MonoBehaviour
             // StartRecoil(0.1f, 10f, 10f);
             GunBurst.Stop();
             GunBurst.Play();
+
+            if (gunAudio.isPlaying == false)
+                gunAudio.Play();
+
             foreach (var col in Physics.OverlapSphere(ExplosionOrigin.transform.position, radius))
             {
                 var rigidbody = col.GetComponent<Rigidbody>();
@@ -71,8 +83,10 @@ public class Recoil : MonoBehaviour
                 rigidbody.AddExplosionForce(force, ExplosionOrigin.transform.position, radius, up, forceMode);
             }
 
-            // car doesn't have a collider on it, so it's rigid body isn't found in Physics.OverlapSphere
-            this.GetComponent<Rigidbody>().AddExplosionForce(force, ExplosionOrigin.transform.position, radius, up, forceMode);
+            // AddExplosionForce and AddForce make the car frustrating to drive. If you want to try it, uncomment this line.
+            // this.GetComponent<Rigidbody>().AddForce(Vector3.forward * force * 100);
+
+            CarRecoil = 1; // HACK: SimpleCarController uses this global variable to add wheel torque
         }
     }
 }
