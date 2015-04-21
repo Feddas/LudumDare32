@@ -21,3 +21,11 @@ What's your engine? An unconventionally used weapon!
 
 # TODO:
 check if players vector up matches world vector up with a dot product. if more than 80`, restart in center.
+
+# Unity Webplayer PSA
+PSA: As of Chrome 42 (Released April 14th, 2015), NPAPI plugins are disabled by default! That means Unity Player, Java, and Silverlight games will not work in the Chrome browser! That said, Flash in the Chrome browser continues to work fine (PPAPI).
+To Developers: Consider using HTML5 and WebGL instead. Having troubles with the export?
+To Players: A workaround is to enable NPAPI plugins in your Chrome settings. Click or Copy+Paste this URL in to a tab:
+chrome://flags/#enable-npapi
+As of September 2015 however, this option will no longer be available.
+Other browsers (Firefox, Internet Explorer, Safari) and Flash are unaffected, but FWIW there is no Unity Player or Silverlight for Linux.
