@@ -18,7 +18,7 @@ public class MakeCoins : MonoBehaviour
     {
         float FPS = 1f / Time.deltaTime;
         bool hasPerfIssue = coins.Count > 30 && FPS < 30; // at least 30 cubes even for slow machines
-        if (coins.Count > 1000 && hasPerfIssue)
+        if (coins.Count > 1000 || hasPerfIssue)
             return;
 
         var position = new Vector3(Random.Range(6, 16), 20, Random.Range(4, 14));
